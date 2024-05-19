@@ -1,0 +1,801 @@
+1.//check if a given string is a palindrome                 
+function checkPalindrome(string) {
+const len = string.length;
+for (let i = 0; i < len / 2; i++) {
+  if (string[i] !== string[len - 1 - i]) {
+    return 'It is not a palindrome';
+  }
+}
+  return 'It is a palindrome';
+}
+
+const string = prompt('Enter a string: ');
+const value = checkPalindrome(string);
+console.log(value);
+
+2.//Create a simple to-do list application using HTML, CSS, and JavaScript. Users should be able to add tasks, mark them as complete, and delete them.
+
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="task-input" placeholder="Add a new task">
+            <button id="add-task-button">Add</button>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+style.css
+* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#task-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#add-task-button {
+    padding: 10px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#add-task-button:hover {
+    background-color: #218838;
+}
+
+#task-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.task-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.task-buttons button {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.complete-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.complete-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const taskInput = document.getElementById('task-input');
+    const addTaskButton = document.getElementById('add-task-button');
+    const taskList = document.getElementById('task-list');
+
+    addTaskButton.addEventListener('click', () => 
+    {
+        const taskText = taskInput.value.trim();
+        if (taskText !== "") 
+        {
+            addTask(taskText);
+            taskInput.value = "";
+        }
+    });
+
+    taskList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('complete-button')) 
+        {
+            const taskItem = e.target.closest('.task-item');
+            taskItem.classList.toggle('completed');
+        } 
+        else if (e.target.classList.contains('delete-button')) 
+        {
+            const taskItem = e.target.closest('.task-item');
+            taskList.removeChild(taskItem);
+        }
+    });
+
+    function addTask(taskText) {
+        const taskItem = document.createElement('li');
+        taskItem.classList.add('task-item');
+
+        const taskContent = document.createElement('span');
+        taskContent.textContent = taskText;
+        taskItem.appendChild(taskContent);
+
+        const taskButtons = document.createElement('div');
+        taskButtons.classList.add('task-buttons');
+
+        const completeButton = document.createElement('button');
+        completeButton.classList.add('complete-button');
+        completeButton.textContent = 'Complete';
+        taskButtons.appendChild(completeButton);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.textContent = 'Delete';
+        taskButtons.appendChild(deleteButton);
+
+        taskItem.appendChild(taskButtons);
+        taskList.appendChild(taskItem);
+    }
+});
+
+3. Write a function that takes an array of integers and returns a new array with only the unique values.
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+public class UniqueArray {
+
+    public static int[] getUniqueArray(int[] array) {
+        // Use a Set to store unique values
+        Set<Integer> uniqueSet = new HashSet<>();
+        for (int num : array) {
+            uniqueSet.add(num);
+        }
+
+        // Convert the Set back to an array
+        int[] uniqueArray = new int[uniqueSet.size()];
+        int index = 0;
+        for (int num : uniqueSet) {
+            uniqueArray[index++] = num;
+        }
+
+        return uniqueArray;
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        int[] array = {1, 2, 2, 3, 4, 4, 5};
+        int[] uniqueArray = getUniqueArray(array);
+
+        // Print the unique array
+        System.out.println(Arrays.toString(uniqueArray));
+    }
+}
+
+4. Implement a recursive function to calculate the factorial of a number.
+public class Factorial {
+
+    public static int factorial(int n) {
+      
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        // Recursive case: n * factorial of (n-1)
+        return n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+   
+        int number = 5;
+        int result = factorial(number);
+        System.out.println("Factorial of " + number + " is: " + result);
+
+    }
+}
+
+5.  Create a dynamic form validation library in JavaScript that can handle various types of inputs (text, email, password, etc.) and validation rules.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="myForm">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span class="error-message"></span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error-message"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span class="error-message"></span>
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span class="error-message"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <script src="formValidator.js"></script>
+</body>
+</html>
+
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    display: none;
+}
+
+input.invalid {
+    border-color: red;
+}
+
+// formValidator.js
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myForm');
+
+    const validators = {
+        required: (value) => value.trim() !== '',
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        password: (value) => value.length >= 8,
+        confirmPassword: (value, allValues) => value === allValues.password,
+    };
+
+    const getErrorMessage = (type) => {
+        const messages = {
+            required: 'This field is required.',
+            email: 'Please enter a valid email address.',
+            password: 'Password must be at least 8 characters long.',
+            confirmPassword: 'Passwords do not match.',
+        };
+        return messages[type];
+    };
+
+    const validateInput = (input, allValues) => {
+        const rules = input.getAttribute('data-validate').split(' ');
+        for (let rule of rules) {
+            if (!validators[rule](input.value, allValues)) {
+                return getErrorMessage(rule);
+            }
+        }
+        return null;
+    };
+
+    const validateForm = (form) => {
+        const inputs = form.querySelectorAll('input[data-validate]');
+        let isValid = true;
+        const values = Array.from(inputs).reduce((acc, input) => {
+            acc[input.name] = input.value;
+            return acc;
+        }, {});
+
+        inputs.forEach(input => {
+            const errorMessage = validateInput(input, values);
+            const errorElement = input.nextElementSibling;
+            if (errorMessage) {
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+                input.classList.add('invalid');
+                isValid = false;
+            } else {
+                errorElement.style.display = 'none';
+                input.classList.remove('invalid');
+            }
+        });
+        return isValid;
+    };
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (validateForm(form)) {
+            alert('Form submitted successfully!');
+        }
+    });
+
+    form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => validateForm(form));
+    });
+});
+
+6. Build a small React or Vue application that fetches data from an API and displays it in a user-friendly way.
+
+// src/UserList.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './UserList.css';
+
+const UserList = () => {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/users')
+            .then(response => {
+                setUsers(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                setError(error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>Error loading users: {error.message}</p>;
+    }
+
+    return (
+        <div className="user-list">
+            <h1>User List</h1>
+            <ul>
+                {users.map(user => (
+                    <li key={user.id} className="user-card">
+                        <h2>{user.name}</h2>
+                        <p><strong>Email:</strong> {user.email}</p>
+                        <p><strong>Phone:</strong> {user.phone}</p>
+                        <p><strong>Website:</strong> {user.website}</p>
+                        <p><strong>Company:</strong> {user.company.name}</p>
+                        <p><strong>Address:</strong> {${user.address.suite}, ${user.address.street}, ${user.address.city}, ${user.address.zipcode}}</p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default UserList;
+
+/* src/UserList.css */
+.user-list {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.user-list h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-card h2 {
+    margin-top: 0;
+}
+
+.user-card p {
+    margin: 5px 0;
+}
+
+// src/App.js
+import React from 'react';
+import UserList from './UserList';
+
+function App() {
+    return (
+        <div className="App">
+            <UserList />
+        </div>
+    );
+}
+
+export default App;
+
+                               PYTHON
+7.Implement a recursive function to calculate the factorial of a number.
+
+def factorial(x):
+    if x == 1:
+        return 1
+    else:
+        return (x * factorial(x-1))
+
+
+num = 7
+num = int(input("Enter a number: "))
+
+result = factorial(num)
+print("The factorial of", num, "is", result)
+
+8. Build a RESTful API using Flask or Django that allows users to perform CRUD operations on a resource (e.g., a list of books, todos, etc.).
+
+pip install flask
+# importing libraries
+from flask import Flask, request, Response, jsonify
+# creating an instance of the flask app
+app = Flask(__name__)
+pip install flask-sqlalchemy
+#importing libraries
+from flask import Flask, request, Response,jsonify
+from flask sqlalchemy import SQLALchemy
+app = Flask(_name_)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY TRACK MODIFICATIONS'] = False
+
+from settings import *
+import json
+# Initializing our database
+db = SQLAlchemy(app)
+
+class Movie(db.Model):
+    __tablename__ = 'movies'  # creating a table name
+    id = db.Column(db.Integer, primary_key=True)  # this is the primary key
+    title = db.Column(db.String(80), nullable=False)
+    # nullable is false so the column can't be empty
+    year = db.Column(db.Integer, nullable=False)
+    genre = db.Column(db.String(80), nullable=False)
+    def json(self):
+        return {'id': self.id, 'title': self.title,
+                'year': self.year, 'genre': self.genre}
+        # this method we are defining will convert our output to json    
+    def add_movie(_title, _year, _genre):
+        new_movie = Movie(title=_title, year=_year, genre=_genre)
+        db.session.add(new_movie) 
+        db.session.commit() 
+    def get_all_movies():
+        '''function to get all movies in our database'''
+        return [Movie.json(movie) for movie in Movie.query.all()]
+    def get_movie(_id):
+        '''function to get movie using the id of the movie as parameter'''
+        return [Movie.json(Movie.query.filter_by(id=_id).first())]
+        def update_movie(_id, _title, _year, _genre):
+        '''function to update the details of a movie using the id, title,
+        year and genre as parameters'''
+        movie_to_update = Movie.query.filter_by(id=_id).first()
+        movie_to_update.title = _title
+        movie_to_update.year = _year
+        movie_to_update.genre = _genre
+        db.session.commit()
+    def delete_movie(_id):
+        '''function to delete a movie from our database using
+           the id of the movie as a parameter'''
+        Movie.query.filter_by(id=_id).delete()
+        # filter movie by id and delete
+        db.session.commit()  # commiting the new change to our database
+    python
+    from movies import db
+    db.create_all()
+    from movies import *
+    # route to get all movies
+    @app.route('/movies', methods=['GET'])
+    def get_movies():
+         '''Function to get all the movies in the database'''
+    return jsonify({'Movies': Movie.get_all_movies()})
+      
+    # route to get movie by id
+   @app.route('/movies/<int:id>', methods=['GET'])
+   def get_movie_by_id(id):
+       return_value = Movie.get_movie(id)
+       return jsonify(return_value)
+    # route to add new movie
+    @app.route('/movies', methods=['POST'])
+    def add_movie():
+        '''Function to add new movie to our database'''
+         request_data = request.get_json()  
+         Movie.add_movie(request_data["title"], request_data["year"],
+                    request_data["genre"])
+         response = Response("Movie added", 201, mimetype='application/json')
+    return response
+    # route to update movie with PUT method
+    @app.route('/movies/<int:id>', methods=['PUT'])
+    def update_movie(id):
+         '''Function to edit movie in our database using movie id'''
+    request_data = request.get_json()
+    Movie.update_movie(id, request_data['title'], request_data['year'],                                      
+    request_data['genre'])
+    response = Response("Movie Updated", status=200, mimetype='application/json')
+    return response
+    # route to delete movie using the DELETE method
+    @app.route('/movies/<int:id>', methods=['DELETE'])
+    def remove_movie(id):
+         '''Function to delete movie from our database'''
+        Movie.delete_movie(id)
+        response = Response("Movie Deleted", status=200, mimetype='application/json')
+    return response
+    if __name__ == "__main__":
+                app.run(port=1234, debug=True)
+    python api.py
+
+9. Create a web scraping tool using BeautifulSoup or Scrapy to extract data from a website and store it in a structured format (e.g., CSV, JSON, database).
+
+my_env/bin/activate
+nano nga_z_artists.py
+# Import libraries
+import requests
+from bs4 import BeautifulSoup
+import requests
+from bs4 import BeautifulSoup
+page = requests.get('https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm')
+import requests
+from bs4 import BeautifulSoup
+
+
+page = requests.get('https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm')
+
+# Create a BeautifulSoup object
+soup = BeautifulSoup(page.text, 'html.parser')
+import requests
+from bs4 import BeautifulSoup
+
+
+# Collect and parse first page
+page = requests.get('https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm')
+soup = BeautifulSoup(page.text, 'html.parser')
+
+# Pull all text from the BodyText div
+artist_name_list = soup.find(class_='BodyText')
+
+# Pull text from all instances of <a> tag within BodyText div
+artist_name_list_items = artist_name_list.find_all('a')
+...
+artist_name_list = soup.find(class_='BodyText')
+artist_name_list_items = artist_name_list.find_all('a')
+
+# Create for loop to print out all artists' names
+for artist_name in artist_name_list_items:
+    print(artist_name.prettify())
+python nga_z_artists.pyimport requests
+from bs4 import BeautifulSoup
+
+
+page = requests.get('https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm')
+
+soup = BeautifulSoup(page.text, 'html.parser')
+
+# Remove bottom links
+last_links = soup.find(class_='AlphaNav')
+last_links.decompose()
+
+artist_name_list = soup.find(class_='BodyText')
+artist_name_list_items = artist_name_list.find_all('a')
+
+for artist_name in artist_name_list_items:
+    print(artist_name.prettify())import requests
+from bs4 import BeautifulSoup
+
+
+page = requests.get('https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ1.htm')
+
+soup = BeautifulSoup(page.text, 'html.parser')
+
+last_links = soup.find(class_='AlphaNav')
+last_links.decompose()
+
+artist_name_list = soup.find(class_='BodyText')
+artist_name_list_items = artist_name_list.find_all('a')
+
+# Use .contents to pull out the <a> tag’s children
+for artist_name in artist_name_list_items:
+    names = artist_name.contents[0]
+    print(names)
+...
+for artist_name in artist_name_list_items:
+    names = artist_name.contents[0]
+    links = 'https://web.archive.org' + artist_name.get('href')
+    print(names)
+    print(links)
+import csv
+f = csv.writer(open('z-artist-names.csv', 'w'))
+f.writerow(['Name', 'Link'])
+f.writerow([names, links])
+import requests
+import csv
+from bs4 import BeautifulSoup
+
+
+page = requests.get('https://web.archive.org/web/20121007172955/http://www.nga.gov/collection/anZ1.htm')
+
+soup = BeautifulSoup(page.text, 'html.parser')
+
+last_links = soup.find(class_='AlphaNav')
+last_links.decompose()
+
+# Create a file to write to, add headers row
+f = csv.writer(open('z-artist-names.csv', 'w'))
+f.writerow(['Name', 'Link'])
+
+artist_name_list = soup.find(class_='BodyText')
+artist_name_list_items = artist_name_list.find_all('a')
+
+for artist_name in artist_name_list_items:
+    names = artist_name.contents[0]
+    links = 'https://web.archive.org' + artist_name.get('href')
+
+
+    # Add each artist’s name and associated link to a row
+    f.writerow([names, links])
+pages = []
+for i in range(1, 5):
+    url = 'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ' + str(i) + '.htm'
+    pages.append(url)
+pages = []
+
+for i in range(1, 5):
+    url = 'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ' + str(i) + '.htm'
+    pages.append(url)
+    
+for item in pages:
+    page = requests.get(item)
+    soup = BeautifulSoup(page.text, 'html.parser')
+
+    last_links = soup.find(class_='AlphaNav')
+    last_links.decompose()
+
+    artist_name_list = soup.find(class_='BodyText')
+    artist_name_list_items = artist_name_list.find_all('a')
+
+for artist_name in artist_name_list_items:
+    names = artist_name.contents[0]
+    links = 'https://web.archive.org' + artist_name.get('href')
+
+    f.writerow([names, links])
+import requests
+import csv
+from bs4 import BeautifulSoup
+
+
+f = csv.writer(open('z-artist-names.csv', 'w'))
+f.writerow(['Name', 'Link'])
+
+pages = []
+
+for i in range(1, 5):
+    url = 'https://web.archive.org/web/20121007172955/https://www.nga.gov/collection/anZ' + str(i) + '.htm'
+    pages.append(url)
+
+
+for item in pages:
+    page = requests.get(item)
+    soup = BeautifulSoup(page.text, 'html.parser')
+
+    last_links = soup.find(class_='AlphaNav')
+    last_links.decompose()
+
+    artist_name_list = soup.find(class_='BodyText')
+    artist_name_list_items = artist_name_list.find_all('a')
+
+for artist_name in artist_name_list_items:
+    names = artist_name.contents[0]
+    links = 'https://web.archive.org' + artist_name.get('href')
+
+f.writerow([names, links])
+import requests
+
+headers = {
+    'User-Agent': 'Your Name, example.com',
+    'From': 'email@example.com'
+}
+
+url = 'https://example.com'
+
+page = requests.get(url, headers = headers)
+                
+                
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
